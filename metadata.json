@@ -1,1 +1,7 @@
-{"author": "ketsapiwiq", "name": "C10VID", "description": "Demo for the BSEC air quality sensors, see https://github.com/ketsapiwiq/c10vid", "category": "Hardware", "revision": 1}
+{
+  "author": "azrdev",
+  "name": "Ampel",
+  "description": "Display a traffic light based on BME680 readings of Indoor Air Quality",
+  "category": "Hardware",
+  "revision": 1
+}
