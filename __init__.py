@@ -77,8 +77,27 @@ def accuracy_string(iaq_accuracy):
         return "High"
 
 
-def main():
+def brightness_by_time(now):
+    """
+    given seconds since 2000-01-01 00:00 localtime,
+    return a display brightness value (0-100)
+    appropriate for time of day and day of year
+    """
+    second_of_day = now // (24 * 60 * 60)
+    day_of_year = now % (365 * 24 * 60 * 60) // (24 * 60 * 60)
+    if 90 < day_of_year < 270:  # summer
+        if 20000 < second_of_day < 80000:  # daytime
+            return 25
+        else:  # night
+            return 15
+    else:  # winter
+        if 30000 < second_of_day < 60000:  # daytime
+            return 25
+        else:  # night
+            return 15
 
+def main():
+    # init
     power_saving = False  # toggled by button. True → screen off
 
     disp = display.open()
@@ -136,7 +155,8 @@ def main():
 
             disp.clear()
             if(not power_saving):
-                disp.backlight(25)
+                disp.backlight(brightness_by_time(time.time()))
+                ##### Display like ###
                 # eCO2: 666          #
                 # IAQ: 323           #
                 #   accuracy: Medium #
